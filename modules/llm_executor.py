@@ -26,7 +26,7 @@ def generate_future_resume(prompt: str) -> str:
         response = openai.ChatCompletion.create(
             engine=AZURE_OPENAI_DEPLOYMENT,
             messages=[
-                {"role": "system", "content": "あなたはプロのキャリアアドバイザーです。"},
+                {"role": "system", "content": "あなたは優秀なプロのキャリアアドバイザーです。"},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
