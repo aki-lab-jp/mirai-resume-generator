@@ -1,41 +1,45 @@
-# modules/llm_executor.py
-
 import os
-import openai
-import streamlit as st
+from openai import AzureOpenAI
 from dotenv import load_dotenv
 
 # .envファイルから環境変数を読み込む
 load_dotenv()
 
-# Azure OpenAI の設定
-AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
-AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-AZURE_OPENAI_DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT")
-AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION")
+endpoint = "https://gene-ai.openai.azure.com/"
+model_name = "gpt-4o-mini"
+deployment = "gpt-4o-mini"
 
-# APIクライアント初期化
-openai.api_type = "azure"
-openai.api_base = AZURE_OPENAI_ENDPOINT
-openai.api_version = AZURE_OPENAI_API_VERSION
-openai.api_key = AZURE_OPENAI_API_KEY
+subscription_key = os.getenv("AZURE_OPENAI_API_KEY")
+api_version = "2024-12-01-preview"
 
+client = AzureOpenAI(
+    api_version=api_version,
+    azure_endpoint=endpoint,
+    api_key=subscription_key,
+)
 
 def generate_future_resume(prompt: str) -> str:
     try:
-        response = openai.ChatCompletion.create(
-            engine=AZURE_OPENAI_DEPLOYMENT,
+        response = client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "あなたは優秀なプロのキャリアアドバイザーです。"},
-                {"role": "user", "content": prompt}
+                {
+                    "role": "system",
+                    "content": "あなたは優秀なキャリアアドバイザーです。",
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
             ],
-            temperature=0.7,
-            max_tokens=1500
+            max_tokens=4096,
+            temperature=1.0,
+            top_p=1.0,
+            model=deployment
         )
 
-        message = response["choices"][0]["message"]["content"]
-        return message
-
+        result = response.choices[0].message.content.strip()
+        return result
+    
     except Exception as e:
-        st.error(f"エラーが発生しました: {e}")
-        return ""
+        return f"⚠️ エラーが発生しました：{e}"
+

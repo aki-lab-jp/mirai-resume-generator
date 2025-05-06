@@ -15,7 +15,7 @@ def build_prompt(goal, years, resume_text, appeal_axis, realism="realistic"):
 
     prompt = f"""
 あなたは優秀なキャリアアドバイザーです。
-以下の職務経歴書をもとに、{years}年後に「{goal}」という目標を達成した人物の職務経歴書（未来バージョン）を作成してください。
+以下の職務経歴書をもとに、{years}年後に「{goal}」という目標を達成した人物の未来の職務経歴書を作成してください。結果のみを出力してください。
 
 【重視すべきアピール軸】「{appeal_axis}」を強く印象づける構成にしてください  
 【実績レベル】{tone}  
@@ -23,6 +23,7 @@ def build_prompt(goal, years, resume_text, appeal_axis, realism="realistic"):
 【出力形式】Markdown形式で以下の構成で記述してください：
 
 ---
+- タイトル「{years}年後の職務経歴書」
 - 職務要約（未来の実績を含む）
 - 保有スキル・経験（未来のスキルも含めてOK）
 - 具体的なプロジェクト例（未来のものを2～3件）
