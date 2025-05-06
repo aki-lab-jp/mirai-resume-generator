@@ -1,4 +1,4 @@
-# わたしの職務経歴書(未来版) | Mirai Resume Generator ✨
+# わたしの職務経歴書(未来版) ✨
 
 生成AIで未来のキャリアを描く  
 現在の職務経歴書を元に、目指す姿に向けた未来の職務経歴書とキャリアロードマップを自動生成します。
@@ -61,8 +61,8 @@ streamlit run app.py
 
 ## 👩‍💻 Author
 A-Koike
-DX・業務改善・生成AIに情熱を注ぐエンジニア
-業務プロセスの最適化から生成AIの実運用までを一貫して推進。
-Power Platform × Azure OpenAI の先端施策で社内表彰歴あり。
+- DX・業務改善・生成AIに情熱を注ぐエンジニア
+- 業務プロセスの最適化から生成AIの実運用までを一貫して推進
+- Power Platform × 生成AI の先端施策で社内表彰歴あり
 - GitHub: @aki-lab-jp
 - LinkedIn: 
