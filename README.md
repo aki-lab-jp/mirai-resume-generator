@@ -25,18 +25,24 @@
 ---
 
 ## 🔐 OpenAI API の設定方法
-本アプリは OpenAI の GPT モデル（ChatGPT）を使用しており、利用には OpenAI API キーの取得・設定 が必要です。
-🔧 手順：
-1.OpenAIの公式サイト にてアカウントを作成
-2.APIキーの管理画面 にアクセスし、「Create new secret key」をクリックして取得
-3.プロジェクトルートに .env ファイルを作成し、以下のように記載：
+本アプリは Microsoft の Azure OpenAI Service を利用しています。  
+利用には **Azure ポータルでのリソース作成と API キーの設定**が必要です。    
+### 🔧 手順：  
+1. Azure ポータルで「Azure OpenAI」のリソースを作成  
+2. 使用したいモデル（例：gpt-35-turbo など）をデプロイ  
+3. 以下の情報を `.env` ファイルに記載してください：  
 
 ```env
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+AZURE_OPENAI_ENDPOINT=https://<あなたのリソース名>.openai.azure.com/
+AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+AZURE_OPENAI_DEPLOYMENT_NAME=gpt-35-turbo
+AZURE_OPENAI_API_VERSION=2024-02-15-preview
 ```
-.env は自動で読み込まれるよう python-dotenv を使用します（requirements.txt に含める予定）
 
-⚠️ APIキーは絶対に公開しないでください。GitHubにプッシュしないよう注意！
+💡 `API_VERSION` は Azure OpenAI の公式ドキュメントまたは Azure ポータルで案内されている最新バージョンを使用してください。  
+⚠️ `.env` ファイルには認証情報が含まれるため、**必ず `.gitignore` に追加して GitHub にアップロードしないようにしてください。**  
+⚠️ **API キーは絶対に公開しないでください。** GitHub 上や他人に見える場所に含めないよう注意しましょう。  
+🛠 `.env` ファイルの読み込みには `python-dotenv` を使用します（`requirements.txt` に含める予定です）。  
 
 ---
 
